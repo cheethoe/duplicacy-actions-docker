@@ -1,5 +1,5 @@
 # This Dockerfile creates an image meant to initialize storage and repository for duplicacy
-From cheethoe/duplicacy-base:2.0.9
+From cheethoe/duplicacy-base:2.0.10
 LABEL maintainer="Michael Hsu"
 
 # Environment Vars
@@ -9,6 +9,8 @@ ENV STORAGE_URL "sftp://127.0.0.1"
 #  Encryption password
 ENV DUPLICACY_PASSWORD ""
 #  SFTP
+#  This will not actually work, duplicacy developer states
+#  it can only read the ssh password from the keyring.
 ENV DUPLICACY_SSH_PASSWORD ""
 ENV DUPLICACY_SSH_KEY_FILE ""
 #  Dropbox
@@ -30,4 +32,4 @@ ENV DUPLICACY_HUBIC_TOKEN ""
 
 
 WORKDIR $BACKUP_DIR
-ENTRYPOINT ["/bin/sh", "-c", "/${DUPLICACY_BASE_NAME}_${DUPLICACY_VERSION} -background -debug -log init -e ${SNAPSHOT_ID} ${STORAGE_URL}"]
+ENTRYPOINT ["/bin/sh", "-c", "/${DUPLICACY_BASE_NAME} -background -debug -log init -e ${SNAPSHOT_ID} ${STORAGE_URL}"]
