@@ -7,5 +7,6 @@ else
     for keep_entry in $KEEP; do
         PRUNE_OPTIONS="${PRUNE_OPTIONS} -keep ${keep_entry}"
     done
+fi
 
 /${DUPLICACY_BASE_NAME} -background prune ${PRUNE_OPTIONS}
